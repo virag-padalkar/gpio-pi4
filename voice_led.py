@@ -15,9 +15,9 @@ def capture_audio():
     r = sr.Recognizer()
     with sr.Microphone() as source:
         r.adjust_for_ambient_noise(source, duration=1)
-        print("Say something!")
+        print("Enter voice command!\n")
         audio = r.listen(source,phrase_time_limit=5)
-        print ("Audio captured")
+        print ("Audio captured . . please wait")
     global response
     response = r.recognize_google(audio)
     return response
@@ -26,15 +26,16 @@ def capture_audio():
 def operate_gpio():
     capture_audio()
     if "switch on" in response:
-        print ("Switching on LED for 5 seconds")
+        print ("Switching on LED for 5 seconds\n")
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(18, GPIO.OUT)
         GPIO.output(18, GPIO.HIGH)
         time.sleep(5)
         GPIO.output(18, GPIO.LOW)
         GPIO.cleanup()
+        print ("Switching off LED")
     else:
-        print ("Incorrect command")
+        print ("Incorrect command, terminating program")
 
 # run the program
 operate_gpio()
