@@ -26,7 +26,7 @@ def capture_audio():
 def operate_gpio():
     capture_audio()
     if "switch on" in response:
-        print ("Switching on LED")
+        print ("Switching on LED for 5 seconds")
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(18, GPIO.OUT)
         GPIO.output(18, GPIO.HIGH)
