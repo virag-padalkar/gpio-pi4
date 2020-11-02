@@ -18,13 +18,12 @@ def capture_audio():
         print("Enter voice command!\n")
         audio = r.listen(source,phrase_time_limit=5)
         print ("Audio captured . . please wait")
-    global response
     response = r.recognize_google(audio)
     return response
 
 # function to operate gpio via output of audio capture function above
 def operate_gpio():
-    capture_audio()
+    response = capture_audio()
     if "switch on" in response:
         print ("Switching on LED for 5 seconds\n")
         GPIO.setmode(GPIO.BCM)
@@ -37,5 +36,9 @@ def operate_gpio():
     else:
         print ("Incorrect command, terminating program")
 
-# run the program
-operate_gpio()
+# main
+def main():
+	operate_gpio()
+
+if __name__ == "__main__":
+    main()
