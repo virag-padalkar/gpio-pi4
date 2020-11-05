@@ -36,7 +36,7 @@ def operate_gpio():
     else:
         print ("Incorrect command, terminating program")
 
-# main
+# main function
 def main():
 	operate_gpio()
 
